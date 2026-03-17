@@ -1,0 +1,4 @@
+
+   {
+  "connectionString": "mongodb://hasanuser:hasan123@ac-ox6wjih-shard-00-00.iefm0xs.mongodb.net:27017,ac-ox6wjih-shard-00-01.iefm0xs.mongodb.net:27017,ac-ox6wjih-shard-00-02.iefm0xs.mongodb.net:27017/notesapp?ssl=true&replicaSet=atlas-8lffh6-shard-0&authSource=admin"
+}
