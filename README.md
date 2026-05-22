@@ -3,6 +3,7 @@
 **Progetto per l'esame di Applicazioni web Mobile e Cloud**  
 **Studente: Ahmed Muhammad Hasan** 
 
+
 ## 🎯 Obiettivo del Progetto
 L'obiettivo di questo progetto è la realizzazione di un'applicazione web cloud-native per la gestione di note personali. L'architettura è stata progettata per essere scalabile, sicura e facilmente distribuibile tramite container.
 
@@ -24,20 +25,22 @@ Grazie a Docker, l'avvio dell'applicazione è completamente automatizzato e non 
 1. Clonare questo repository.
 2. Creare un file `.env` nella cartella `backend` inserendo le proprie credenziali MongoDB e il segreto JWT (vedi la sezione configurazione).
 3. Aprire il terminale nella cartella root del progetto e lanciare il comando:
+
 ```bash
-   docker compose up --build
-4. Aprire il browser all'indirizzo: http://localhost:5173   
+docker compose up --build
+```
 
-🔐 Configurazione Variabili d'Ambiente (.env)
-Per motivi di sicurezza, il file .env non è incluso nel repository. È necessario crearlo nella cartella /backend con la seguente struttura:
+4. Aprire il browser all'indirizzo: http://localhost:5173
 
-Snippet di codice
+## 🔐 Configurazione Variabili d'Ambiente (.env)
+Per motivi di sicurezza, il file `.env` non è incluso nel repository. È necessario crearlo nella cartella `backend` con la seguente struttura:
+
+```env
 ACCESS_TOKEN_SECRET=inserisci_una_chiave_segreta_qui
 MONGODB_URI=inserisci_il_link_di_mongodb_qui
+```
 
-✨ Funzionalità Principali
-Registrazione e Login sicuri (password protette tramite hashing).
-
-Creazione, modifica, eliminazione e ricerca delle note.
-
-Fissaggio in alto (Pin) delle note più importanti.
+## ✨ Funzionalità Principali
+- Registrazione e Login sicuri (password protette tramite hashing).
+- Creazione, modifica, eliminazione e ricerca delle note.
+- Fissaggio in alto (Pin) delle note più importanti.
