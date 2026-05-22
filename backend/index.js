@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 // Connessione al Database
-mongoose.connect(config.connectionString)
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("✅ Connesso al Database"))
     .catch((err) => console.log("❌ Errore di connessione:", err));
 
