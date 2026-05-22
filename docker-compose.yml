@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    # Questo dice a Docker di usare le tue password/variabili dal file .env
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    # Qui diciamo a Docker di andare a cercare il frontend nella tua cartella specifica
+    build: ./frontend/notes-app
+    ports:
+      - "5173:5173"
+    # Il frontend deve aspettare che il backend sia acceso
+    depends_on:
+      - backend

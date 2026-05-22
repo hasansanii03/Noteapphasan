@@ -174,8 +174,7 @@ getUserInfo()
    ) : (
     <EmptyCard   
     imgSrc={isSearch ? NoDataImg : AddNotesImg} 
-    message={isSearch ? `oops! No notes found matching your search.` : `Start creating your first note! Click the 'Add' button to jot down your 
-      thoughts, ideas, and reminders. Let's get started!
+    message={isSearch ? `oops! No notes found matching your search.` : `Inizia a creare nuove note! 
       `}
      
     />

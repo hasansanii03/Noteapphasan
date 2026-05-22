@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const User = require("./models/user.model");
 const Note =require("./models/note.model")
 const { authenticateToken } = require("./utilities");
@@ -48,10 +49,14 @@ app.post("/create-account", async (req, res) => {
         });
     }
 
+   //  Hashing della password con libreria bycript famosissima 
+    // Il numero 10 rappresenta il livello di complessità dell'algoritmo
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const user = new User({
         fullName,
         email,
-        password,
+        password: hashedPassword, // Salviamo la password criptata
     });
 
     await user.save();
@@ -68,39 +73,43 @@ app.post("/create-account", async (req, res) => {
     });
 });
 
-//login account
+// Login account
 app.post("/login", async (req, res) =>{
     const { email, password } = req.body;
 
-        if (!email) {
+    if (!email) {
         return res.status(400).json({ message: "Email is required" });
-        }
-
-        if (!password) {
+    }
+    if (!password) {
         return res.status(400).json({ message: "Password is required" });
-        }
+    }
 
-        const userInfo = await User.findOne({ email: email });
-        if (!userInfo){
+    const userInfo = await User.findOne({ email: email });
+    if (!userInfo){
         return res.status(400).json({ message: "User not found" });
-        }
+    }
 
-        if (userInfo.email == email && userInfo.password ==password) {
+    // Confronto della password 
+    // Bcrypt  prende la password in chiaro digitata dall'utente, 
+    // la cripta al volo e la confronta con quella incomprensibile nel database
+    const isPasswordValid = await bcrypt.compare(password, userInfo.password);
+
+    if (isPasswordValid) {
         const user ={user:userInfo};
         const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-        expiresIn: "36000m",
+            expiresIn: "36000m",
         });
         return res.json({
-        error: false,
-        message: "Login Successful",
-        email,
-        accessToken,
+            error: false,
+            message: "Login Successful",
+            email,
+            accessToken,
         });
-        }else{
+    } else {
         return res.status(400).json({
-        error: true,
-        message: "Invalid Credentials",
-        })
+            error: true,
+            message: "Invalid Credentials",
+        });
     }
 });
 
@@ -167,7 +176,7 @@ app.put("/edit-note/:noteId", authenticateToken, async (req, res) => {
      const {title,content,tags,isPinned} = req.body;
      const {user} =req.user;
 
-    if (!title && ! content && !tags) {
+    if (!title && !content && !tags) {
         return res
         .status(400)
         .json({ error: true, message: "No changes provided" });
