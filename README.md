@@ -33,11 +33,14 @@ docker compose up --build
 4. Aprire il browser all'indirizzo: http://localhost:5173
 
 ## 🔐 Configurazione Variabili d'Ambiente (.env)
-Per motivi di sicurezza, il file `.env` non è incluso nel repository. È necessario crearlo nella cartella `backend` con la seguente struttura:
+Per motivi di sicurezza, il file `.env` non è incluso nel repository. È necessario crearlo manualmente nella cartella `backend` incollando il seguente blocco di codice per collegare l'app al database locale di Docker:
 
 ```env
+# Chiave segreta per i Token (puoi inventare una stringa casuale)
 ACCESS_TOKEN_SECRET=inserisci_una_chiave_segreta_qui
-MONGODB_URI=inserisci_il_link_di_mongodb_qui
+
+# Collegamento al database MongoDB locale gestito da Docker
+MONGODB_URI=mongodb://mongodb:27017/notesapp
 ```
 
 ## ✨ Funzionalità Principali
