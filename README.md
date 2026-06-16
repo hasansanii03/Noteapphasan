@@ -36,7 +36,7 @@ docker compose up --build
 Per motivi di sicurezza, il file `.env` non è incluso nel repository. È necessario crearlo manualmente nella cartella `backend` incollando il seguente blocco di codice per collegare l'app al database locale di Docker:
 
 ```env
-# Chiave segreta per i Token (puoi inventare una stringa casuale)
+# Chiave segreta per i Token 
 ACCESS_TOKEN_SECRET=inserisci_una_chiave_segreta_qui
 
 # Collegamento al database MongoDB locale gestito da Docker
