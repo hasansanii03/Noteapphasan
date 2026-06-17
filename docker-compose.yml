@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  # 1. IL DATABASE LOCALE
+  # 1. IL DATABASE LOCALE (Pronto per il professore)
   database:
     image: mongo:latest
     ports:
@@ -15,18 +15,17 @@ services:
       - "5000:5000"
     depends_on:
       - database # Il backend ora aspetta che il database sia acceso
-    env_file:
-      - ./backend/.env
     environment:
-      # Sovrascriviamo l'URI del file .env 
-      # e diciamo all'app di puntare al container del database.
-      # Docker reindirizzerà "database" al container MongoDB.
+      # Diciamo al backend di usare il database di Docker invece di quello in cloud
       - MONGODB_URI=mongodb://database:27017/notes-app-db
 
   frontend:
     build: ./frontend/notes-app
     ports:
-      - "5173:5173"
+      # ESTERNO : INTERNO
+      # Dal tuo browser scriverai localhost:5173, ma Docker inoltrerà 
+      # la richiesta alla porta 80 di Nginx dentro il container.
+      - "5173:80"
     depends_on:
       - backend
 

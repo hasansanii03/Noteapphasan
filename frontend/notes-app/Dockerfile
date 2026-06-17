@@ -1,21 +1,32 @@
-# 1. Partiamo sempre da Node.js
-FROM node:20-alpine
+# --- FASE 1: La "Fabbrica" (Build) ---
+FROM node:20-alpine AS build
 
-# 2. Creiamo la cartella di lavoro /app
 WORKDIR /app
 
-# 3. Copiamo i file delle dipendenze
+# Copiamo i file e installiamo le librerie
 COPY package*.json ./
-
-# 4. Installiamo le librerie del frontend
 RUN npm install
 
-# 5. Copiamo tutto il resto del codice del frontend
+# Copiamo il resto del codice
 COPY . .
 
-# 6. Esponiamo la porta 5173 (quella che usa Vite di default)
-EXPOSE 5173
+# Invece di avviare il server di sviluppo, diciamo a Vite di 
+# "impacchettare" e ottimizzare tutto il codice. 
+# Questo creerà una cartella invisibile chiamata /app/dist
+RUN npm run build
 
-# 7. Avviamo il frontend. L'aggiunta di "--host" è un trucco obbligatorio 
-# per far funzionare Vite dentro una scatola Docker!
-CMD ["npm", "run", "dev", "--", "--host"]
+
+# --- FASE 2: Il Server Web (Deploy con Nginx) ---
+FROM nginx:alpine
+
+# Prendiamo SOLO i file finali ottimizzati dalla cartella "dist" 
+# e li copiamo dentro la cartella pubblica di Nginx. 
+# Tutto il resto (Node.js, file originali, moduli pesanti) viene buttato via!
+COPY --from=build /app/dist /usr/share/nginx/html
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+#nginx ascolta di default sulla porta 80, quindi non serve esporre la porta 80
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
