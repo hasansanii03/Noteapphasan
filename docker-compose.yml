@@ -1,15 +1,15 @@
 version: '3.8'
 
 services:
-  # 1. IL DATABASE LOCALE (Pronto per il professore)
-  database:
+  # 1. IL DATABASE LOCALE 
+  database: #nome del servizio tipo DNS preso dalla lezione 8
     image: mongo:latest
     ports:
       - "27017:27017"
     volumes:
       - db-data:/data/db # Questo salva i dati così non spariscono se spengo docker
 
-  backend:
+  backend: #nome del servizio tipo DNS preso dalla lezione 8
     build: ./backend
     ports:
       - "5000:5000"
@@ -19,7 +19,7 @@ services:
       # Diciamo al backend di usare il database di Docker invece di quello in cloud
       - MONGODB_URI=mongodb://database:27017/notes-app-db
 
-  frontend:
+  frontend: #nome del servizio tipo DNS preso dalla lezione 8
     build: ./frontend/notes-app
     ports:
       # ESTERNO : INTERNO
