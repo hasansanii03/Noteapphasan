@@ -14,6 +14,16 @@ L'obiettivo di questo progetto è la realizzazione di un'applicazione web cloud-
 - **Sicurezza:** JWT (JSON Web Tokens) per l'autenticazione, Bcrypt per l'hashing delle password.
 - **Infrastruttura:** Docker & Docker Compose (Architettura Cloud-Native)
 
+## 🌐 Accesso all'Applicazione (Live Demo)
+
+L'applicazione è stata deployata in cloud ed è attualmente attiva. È possibile testare il progetto direttamente dal browser, senza necessità di installare Docker o altre dipendenze in locale:
+
+- **Pagina di Login:** [http://13.48.249.65/login](http://13.48.249.65/login)
+- **Pagina di Registrazione:** [http://13.48.249.65/signup](http://13.48.249.65/signup)
+
+*(Nota: una volta effettuato il login o la registrazione, verrai reindirizzato automaticamente alla dashboard sicura delle note).*
+
+
 ## 🚀 Come avviare l'applicazione in locale
 
 Grazie a Docker, l'avvio dell'applicazione è completamente automatizzato e non richiede l'installazione locale di Node.js o altre dipendenze.

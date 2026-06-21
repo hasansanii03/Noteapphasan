@@ -2,25 +2,25 @@ version: '3.8'
 
 services:
   # 1. IL DATABASE LOCALE 
-  database: #nome del servizio tipo DNS preso dalla lezione 8
+  database: #nome del servizio  è il DNS del container preso dalla lezione 8
     image: mongo:latest
     ports:
       - "27017:27017"
     volumes:
-      - db-data:/data/db # Questo salva i dati così non spariscono se spengo docker
+      - db-data:/data/db # Questo salva i dati così non spariscono se spengo docker "prima nome poi percorso nel container docker"
 
-  backend: #nome del servizio tipo DNS preso dalla lezione 8
-    build: ./backend
+  backend: #nome del servizio  è il DNS del container preso dalla lezione 8
+    build: ./backend   # non prende solo dal docker hub ma costruisce l'immagine da questo docerfile che sta nel backend preso da lezione 8
     ports:
       - "5000:5000"
-    depends_on:
+    depends_on: #ordina l'avvio dei container
       - database # Il backend ora aspetta che il database sia acceso
     environment:
       # Diciamo al backend di usare il database di Docker invece di quello in cloud
       - MONGODB_URI=mongodb://database:27017/notes-app-db
 
-  frontend: #nome del servizio tipo DNS preso dalla lezione 8
-    build: ./frontend/notes-app
+  frontend: #nome del servizio  è il DNS del container preso dalla lezione 8
+    build: ./frontend/notes-app # non prende solo dal docker hub ma costruisce l'immagine da questo docerfile che sta nel backend preso da lezione 8
     ports:
       # ESTERNO : INTERNO
       # Dal tuo browser scriverai localhost:5173, ma Docker inoltrerà 
@@ -29,6 +29,6 @@ services:
     depends_on:
       - backend
 
-# Dichiariamo il volume per il database
+# Dichiariamo il volume per il database il volume è diverso dai bindmount anche se spengo i dati rimangono nel container
 volumes:
   db-data:
