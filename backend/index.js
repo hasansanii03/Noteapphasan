@@ -312,7 +312,7 @@ if(!query){
  }
 })
 
-// Avvio Server (usiamo la 8000 come nel video)
+// Avvio Server (usiamo la 5000)
 app.listen(5000, () => {
     console.log("🚀 Server in ascolto sulla porta 5000");
 });

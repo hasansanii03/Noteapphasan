@@ -14,15 +14,6 @@ L'obiettivo di questo progetto è la realizzazione di un'applicazione web cloud-
 - **Sicurezza:** JWT (JSON Web Tokens) per l'autenticazione, Bcrypt per l'hashing delle password.
 - **Infrastruttura:** Docker & Docker Compose (Architettura Cloud-Native)
 
-## 🌐 Accesso all'Applicazione (Live Demo)
-
-L'applicazione è stata deployata in cloud ed è attualmente attiva. È possibile testare il progetto direttamente dal browser, senza necessità di installare Docker o altre dipendenze in locale:
-
-- **Pagina di Login:** [hasannotesapp.duckdns.org/login](http://hasannotesapp.duckdns.org/login)
-- **Pagina di Registrazione:** [http://hasannotesapp.duckdns.org/signup](http://hasannotesapp.duckdns.org/signup)
-
-*(Nota: una volta effettuato il login o la registrazione, verrai reindirizzato automaticamente alla dashboard sicura delle note).*
-
 
 ## 🚀 Come avviare l'applicazione in locale
 
